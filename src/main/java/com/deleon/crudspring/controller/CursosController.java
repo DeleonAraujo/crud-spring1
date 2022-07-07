@@ -2,9 +2,9 @@ package com.deleon.crudspring.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.deleon.crudspring.model.Curso;
 import com.deleon.crudspring.repository.CursoRepository;
@@ -22,6 +22,13 @@ public class CursosController {
     @GetMapping
     public List<Curso> list(){
         return cursoRepository.findAll();
+    }
+
+    //@RequestMapping(method = RequestMethod.POST)
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Curso create(@RequestBody Curso record) {
+        return cursoRepository.save(record);
     }
 
 }
